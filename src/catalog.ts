@@ -21,6 +21,7 @@ const withCategory = (font: ArabicFont, category: FontCategory, tags: string[], 
 });
 
 export const arabicFonts: readonly ArabicFont[] = [
+  withCategory(google('Afacad Arabic'), 'sans-serif', ['modern', 'ui']),
   withCategory(google('Almarai'), 'sans-serif', ['modern', 'ui']),
   withCategory(google('Amiri'), 'serif', ['naskh', 'classical', 'book']),
   withCategory(google('Aref Ruqaa'), 'display', ['ruqaa', 'calligraphic']),
@@ -33,6 +34,7 @@ export const arabicFonts: readonly ArabicFont[] = [
   withCategory(google('El Messiri'), 'sans-serif', ['modern', 'elegant']),
   withCategory(google('Farsan'), 'display', ['handwriting', 'display']),
   withCategory(google('Fustat'), 'sans-serif', ['modern', 'ui']),
+  withCategory(google('Noto Nastaliq Urdu'), 'serif', ['nastaliq', 'calligraphic']),
   withCategory(google('Gulzar'), 'serif', ['nastaliq', 'calligraphic']),
   withCategory(google('Handjet'), 'display', ['experimental', 'display']),
   withCategory(google('Harmattan'), 'sans-serif', ['west-african', 'reading']),
@@ -47,6 +49,7 @@ export const arabicFonts: readonly ArabicFont[] = [
   withCategory(google('Mirza'), 'serif', ['calligraphic', 'reading']),
   withCategory(google('Noto Kufi Arabic'), 'sans-serif', ['kufi', 'ui', 'noto']),
   withCategory(google('Noto Naskh Arabic'), 'serif', ['naskh', 'reading', 'noto']),
+  withCategory(google('Noto Sans Naskh Arabic'), 'sans-serif', ['naskh', 'reading', 'noto']),
   withCategory(google('Noto Sans Arabic'), 'sans-serif', ['ui', 'reading', 'noto']),
   withCategory(google('Noto Serif Arabic'), 'serif', ['serif', 'reading', 'noto']),
   withCategory(google('Qahiri'), 'display', ['display', 'headline']),
@@ -54,12 +57,15 @@ export const arabicFonts: readonly ArabicFont[] = [
   withCategory(google('Readex Pro'), 'sans-serif', ['technical', 'ui']),
   withCategory(google('Reem Kufi'), 'sans-serif', ['kufi', 'modern']),
   withCategory(google('Reem Kufi Fun'), 'display', ['kufi', 'playful']),
+  withCategory(google('Ruwudu'), 'serif', ['reading', 'classical']),
   withCategory(google('Rubik'), 'sans-serif', ['modern', 'ui']),
   withCategory(google('Scheherazade New'), 'serif', ['naskh', 'reading', 'classical']),
   withCategory(google('Tajawal'), 'sans-serif', ['modern', 'ui', 'popular']),
   withCategory(google('Ubuntu', 'UFL-1.0'), 'sans-serif', ['ui', 'technical']),
   withCategory(google('Vazirmatn'), 'sans-serif', ['persian', 'ui', 'reading']),
-  withCategory(google('Zain'), 'display', ['handwriting', 'display'])
+  withCategory(google('Zain'), 'display', ['handwriting', 'display']),
+  withCategory(google('Diodum'), 'display', ['display', 'headline']),
+  withCategory(google('Anek Arabic'), 'sans-serif', ['variable', 'ui'])
 ];
 
 export const catalogVersion = '2026-08-14';
