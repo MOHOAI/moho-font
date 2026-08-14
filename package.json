@@ -1,0 +1,42 @@
+{
+  "name": "moho-font",
+  "version": "0.1.0",
+  "description": "Arabic font catalog and provider utilities for discovering, filtering, and loading open Arabic fonts.",
+  "type": "module",
+  "license": "MIT",
+  "author": "MOHOAI",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MOHOAI/moho-font.git"
+  },
+  "homepage": "https://github.com/MOHOAI/moho-font#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "pack:check": "npm pack --dry-run",
+    "publish:check": "npm publish --dry-run"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}
+
