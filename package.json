@@ -1,6 +1,6 @@
 {
   "name": "moho-font",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Arabic font catalog and provider utilities for discovering, filtering, and loading open Arabic fonts.",
   "type": "module",
   "license": "MIT",
@@ -36,7 +36,8 @@
     "catalog:verify": "node scripts/verify-catalog.mjs",
     "catalog:update": "npm run catalog:sync && npm run catalog:generate && npm run catalog:verify",
     "pack:check": "npm pack --dry-run",
-    "publish:check": "npm publish --dry-run"
+    "publish:check": "npm publish --dry-run",
+    "prepublishOnly": "npm run catalog:verify && npm run build"
   },
   "devDependencies": {
     "tsup": "^8.3.5",

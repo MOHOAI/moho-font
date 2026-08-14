@@ -1,5 +1,4 @@
 node_modules/
-dist/
 coverage/
 .env
 .env.*
@@ -7,7 +6,6 @@ coverage/
 *.log
 .DS_Store
 npm-debug.log*
-data/
 python/.venv/
 python/__pycache__/
 python/src/**/__pycache__/
