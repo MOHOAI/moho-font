@@ -1,89 +1,2372 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal
-from urllib.parse import quote
+from typing import Literal, Optional
 
 FontCategory = Literal["serif", "sans-serif", "display", "handwriting", "monospace"]
 FontLicense = Literal["OFL-1.1", "Apache-2.0", "UFL-1.0", "unknown"]
+FontProvider = Literal["google-fonts", "fontsource", "custom"]
 
 
 @dataclass(frozen=True)
 class Font:
+    id: str
     family: str
-    provider: str
+    provider: FontProvider
     license: FontLicense
     category: FontCategory
     scripts: tuple[str, ...]
+    subsets: tuple[str, ...]
     weights: tuple[int, ...]
     styles: tuple[str, ...]
+    variable: bool
+    last_modified: Optional[str]
     source_url: str
     css_url: str
+    fontsource_package: str
+    fontsource_css_url: str
     tags: tuple[str, ...]
 
 
-def _google(family: str, category: FontCategory, tags: tuple[str, ...], license: FontLicense = "OFL-1.1") -> Font:
-    slug = quote(family, safe="").replace("%20", "+")
-    return Font(
-        family=family,
-        provider="google-fonts",
-        license=license,
-        category=category,
-        scripts=("Arabic", "Latin"),
-        weights=(100, 200, 300, 400, 500, 600, 700, 800, 900),
-        styles=("normal",),
-        source_url=f"https://fonts.google.com/specimen/{slug}",
-        css_url=f"https://fonts.googleapis.com/css2?family={slug}:wght@100..900&display=swap",
-        tags=("arabic", "open-source", *tags),
-    )
-
-
 FONT_CATALOG: tuple[Font, ...] = (
-    _google("Afacad Arabic", "sans-serif", ("modern", "ui")),
-    _google("Almarai", "sans-serif", ("modern", "ui")),
-    _google("Amiri", "serif", ("naskh", "classical", "book")),
-    _google("Aref Ruqaa", "display", ("ruqaa", "calligraphic")),
-    _google("Aref Ruqaa Ink", "display", ("ruqaa", "calligraphic", "ink")),
-    _google("Badeen Display", "display", ("display", "headline")),
-    _google("Baloo Bhaijaan 2", "display", ("rounded", "playful")),
-    _google("Cairo", "sans-serif", ("modern", "ui", "popular")),
-    _google("Cairo Play", "display", ("playful", "display")),
-    _google("Changa", "display", ("geometric", "headline")),
-    _google("El Messiri", "sans-serif", ("modern", "elegant")),
-    _google("Farsan", "display", ("handwriting", "display")),
-    _google("Fustat", "sans-serif", ("modern", "ui")),
-    _google("Noto Nastaliq Urdu", "serif", ("nastaliq", "calligraphic")),
-    _google("Gulzar", "serif", ("nastaliq", "calligraphic")),
-    _google("Handjet", "display", ("experimental", "display")),
-    _google("Harmattan", "sans-serif", ("west-african", "reading")),
-    _google("IBM Plex Sans Arabic", "sans-serif", ("professional", "ui")),
-    _google("Jomhuria", "display", ("display", "headline")),
-    _google("Kufam", "sans-serif", ("kufi", "modern")),
-    _google("Lalezar", "display", ("display", "headline")),
-    _google("Lemonada", "sans-serif", ("rounded", "display")),
-    _google("Mada", "sans-serif", ("reading", "ui")),
-    _google("Marhey", "display", ("display", "rounded")),
-    _google("Markazi Text", "serif", ("reading", "naskh")),
-    _google("Mirza", "serif", ("calligraphic", "reading")),
-    _google("Noto Kufi Arabic", "sans-serif", ("kufi", "ui", "noto")),
-    _google("Noto Naskh Arabic", "serif", ("naskh", "reading", "noto")),
-    _google("Noto Sans Naskh Arabic", "sans-serif", ("naskh", "reading", "noto")),
-    _google("Noto Sans Arabic", "sans-serif", ("ui", "reading", "noto")),
-    _google("Noto Serif Arabic", "serif", ("serif", "reading", "noto")),
-    _google("Qahiri", "display", ("display", "headline")),
-    _google("Rakkas", "display", ("display", "calligraphic")),
-    _google("Readex Pro", "sans-serif", ("technical", "ui")),
-    _google("Reem Kufi", "sans-serif", ("kufi", "modern")),
-    _google("Reem Kufi Fun", "display", ("kufi", "playful")),
-    _google("Ruwudu", "serif", ("reading", "classical")),
-    _google("Rubik", "sans-serif", ("modern", "ui")),
-    _google("Scheherazade New", "serif", ("naskh", "reading", "classical")),
-    _google("Tajawal", "sans-serif", ("modern", "ui", "popular")),
-    _google("Ubuntu", "sans-serif", ("ui", "technical"), "UFL-1.0"),
-    _google("Vazirmatn", "sans-serif", ("persian", "ui", "reading")),
-    _google("Zain", "display", ("handwriting", "display")),
-    _google("Diodum", "display", ("display", "headline")),
-    _google("Anek Arabic", "sans-serif", ("variable", "ui")),
+    Font(
+        id="alexandria",
+        family="Alexandria",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-05",
+        source_url="https://fonts.google.com/specimen/Alexandria",
+        css_url="https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/alexandria",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/alexandria@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="alkalami",
+        family="Alkalami",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Alkalami",
+        css_url="https://fonts.googleapis.com/css2?family=Alkalami:wght@400&display=swap",
+        fontsource_package="@fontsource/alkalami",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/alkalami@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static"
+])
+    ),
+    Font(
+        id="almarai",
+        family="Almarai",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin"
+]),
+        weights=tuple([
+  300,
+  400,
+  700,
+  800
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-02",
+        source_url="https://fonts.google.com/specimen/Almarai",
+        css_url="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap",
+        fontsource_package="@fontsource/almarai",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/almarai@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static"
+])
+    ),
+    Font(
+        id="alyamama",
+        family="Alyamama",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "greek",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "greek",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2026-02-19",
+        source_url="https://fonts.google.com/specimen/Alyamama",
+        css_url="https://fonts.googleapis.com/css2?family=Alyamama:wght@300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/alyamama",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/alyamama@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "variable",
+  "greek"
+])
+    ),
+    Font(
+        id="amiri",
+        family="Amiri",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  700
+]),
+        styles=tuple([
+  "italic",
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-08-26",
+        source_url="https://fonts.google.com/specimen/Amiri",
+        css_url="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap",
+        fontsource_package="@fontsource/amiri",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/amiri@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "naskh"
+])
+    ),
+    Font(
+        id="amiri-quran",
+        family="Amiri Quran",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-08-26",
+        source_url="https://fonts.google.com/specimen/Amiri+Quran",
+        css_url="https://fonts.googleapis.com/css2?family=Amiri+Quran:wght@400&display=swap",
+        fontsource_package="@fontsource/amiri-quran",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/amiri-quran@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "naskh"
+])
+    ),
+    Font(
+        id="aref-ruqaa",
+        family="Aref Ruqaa",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-11",
+        source_url="https://fonts.google.com/specimen/Aref+Ruqaa",
+        css_url="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap",
+        fontsource_package="@fontsource/aref-ruqaa",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/aref-ruqaa@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "ruqaa",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="aref-ruqaa-ink",
+        family="Aref Ruqaa Ink",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-05-30",
+        source_url="https://fonts.google.com/specimen/Aref+Ruqaa+Ink",
+        css_url="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&display=swap",
+        fontsource_package="@fontsource/aref-ruqaa-ink",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/aref-ruqaa-ink@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "ruqaa",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="badeen-display",
+        family="Badeen Display",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-05-30",
+        source_url="https://fonts.google.com/specimen/Badeen+Display",
+        css_url="https://fonts.googleapis.com/css2?family=Badeen+Display:wght@400&display=swap",
+        fontsource_package="@fontsource/badeen-display",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/badeen-display@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static"
+])
+    ),
+    Font(
+        id="baloo-bhaijaan-2",
+        family="Baloo Bhaijaan 2",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700,
+  800
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Baloo+Bhaijaan+2",
+        css_url="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap",
+        fontsource_package="@fontsource/baloo-bhaijaan-2",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/baloo-bhaijaan-2@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="beiruti",
+        family="Beiruti",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Beiruti",
+        css_url="https://fonts.googleapis.com/css2?family=Beiruti:wght@200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/beiruti",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/beiruti@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="blaka",
+        family="Blaka",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Blaka",
+        css_url="https://fonts.googleapis.com/css2?family=Blaka:wght@400&display=swap",
+        fontsource_package="@fontsource/blaka",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/blaka@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static"
+])
+    ),
+    Font(
+        id="blaka-hollow",
+        family="Blaka Hollow",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-11",
+        source_url="https://fonts.google.com/specimen/Blaka+Hollow",
+        css_url="https://fonts.googleapis.com/css2?family=Blaka+Hollow:wght@400&display=swap",
+        fontsource_package="@fontsource/blaka-hollow",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/blaka-hollow@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static"
+])
+    ),
+    Font(
+        id="blaka-ink",
+        family="Blaka Ink",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-05-30",
+        source_url="https://fonts.google.com/specimen/Blaka+Ink",
+        css_url="https://fonts.googleapis.com/css2?family=Blaka+Ink:wght@400&display=swap",
+        fontsource_package="@fontsource/blaka-ink",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/blaka-ink@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static"
+])
+    ),
+    Font(
+        id="cairo",
+        family="Cairo",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Cairo",
+        css_url="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/cairo",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/cairo@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable"
+])
+    ),
+    Font(
+        id="cairo-play",
+        family="Cairo Play",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Cairo+Play",
+        css_url="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/cairo-play",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/cairo-play@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable"
+])
+    ),
+    Font(
+        id="cascadia-code",
+        family="Cascadia Code",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "braille",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "Latin",
+  "Latin Extended",
+  "symbols2",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "braille",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "latin",
+  "latin-ext",
+  "symbols2",
+  "vietnamese"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "italic",
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Cascadia+Code",
+        css_url="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap",
+        fontsource_package="@fontsource/cascadia-code",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "braille",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "symbols2",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="cascadia-mono",
+        family="Cascadia Mono",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "braille",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "Latin",
+  "Latin Extended",
+  "symbols2",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "braille",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "latin",
+  "latin-ext",
+  "symbols2",
+  "vietnamese"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "italic",
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-08",
+        source_url="https://fonts.google.com/specimen/Cascadia+Mono",
+        css_url="https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap",
+        fontsource_package="@fontsource/cascadia-mono",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-mono@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "braille",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "symbols2",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="changa",
+        family="Changa",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Changa",
+        css_url="https://fonts.googleapis.com/css2?family=Changa:wght@200;300;400;500;600;700;800&display=swap",
+        fontsource_package="@fontsource/changa",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/changa@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable"
+])
+    ),
+    Font(
+        id="el-messiri",
+        family="El Messiri",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "cyrillic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "cyrillic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-11",
+        source_url="https://fonts.google.com/specimen/El+Messiri",
+        css_url="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/el-messiri",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/el-messiri@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "cyrillic"
+])
+    ),
+    Font(
+        id="estedad",
+        family="Estedad",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2026-05-13",
+        source_url="https://fonts.google.com/specimen/Estedad",
+        css_url="https://fonts.googleapis.com/css2?family=Estedad:wght@100;200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/estedad",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/estedad@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="fustat",
+        family="Fustat",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Fustat",
+        css_url="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&display=swap",
+        fontsource_package="@fontsource/fustat",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/fustat@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable"
+])
+    ),
+    Font(
+        id="gulzar",
+        family="Gulzar",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-05",
+        source_url="https://fonts.google.com/specimen/Gulzar",
+        css_url="https://fonts.googleapis.com/css2?family=Gulzar:wght@400&display=swap",
+        fontsource_package="@fontsource/gulzar",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/gulzar@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "nastaliq",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="handjet",
+        family="Handjet",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "armenian",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "armenian",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Handjet",
+        css_url="https://fonts.googleapis.com/css2?family=Handjet:wght@100;200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/handjet",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/handjet@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "variable",
+  "armenian",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "hebrew",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="harmattan",
+        family="Harmattan",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Harmattan",
+        css_url="https://fonts.googleapis.com/css2?family=Harmattan:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/harmattan",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/harmattan@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static"
+])
+    ),
+    Font(
+        id="ibm-plex-sans-arabic",
+        family="IBM Plex Sans Arabic",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "cyrillic-ext",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "cyrillic-ext",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2026-03-03",
+        source_url="https://fonts.google.com/specimen/IBM+Plex+Sans+Arabic",
+        css_url="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap",
+        fontsource_package="@fontsource/ibm-plex-sans-arabic",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans-arabic@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static",
+  "cyrillic-ext"
+])
+    ),
+    Font(
+        id="jomhuria",
+        family="Jomhuria",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2026-06-30",
+        source_url="https://fonts.google.com/specimen/Jomhuria",
+        css_url="https://fonts.googleapis.com/css2?family=Jomhuria:wght@400&display=swap",
+        fontsource_package="@fontsource/jomhuria",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/jomhuria@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static"
+])
+    ),
+    Font(
+        id="katibeh",
+        family="Katibeh",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Katibeh",
+        css_url="https://fonts.googleapis.com/css2?family=Katibeh:wght@400&display=swap",
+        fontsource_package="@fontsource/katibeh",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/katibeh@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="kufam",
+        family="Kufam",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "italic",
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-02",
+        source_url="https://fonts.google.com/specimen/Kufam",
+        css_url="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+        fontsource_package="@fontsource/kufam",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/kufam@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="lalezar",
+        family="Lalezar",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Lalezar",
+        css_url="https://fonts.googleapis.com/css2?family=Lalezar:wght@400&display=swap",
+        fontsource_package="@fontsource/lalezar",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/lalezar@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="lateef",
+        family="Lateef",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-16",
+        source_url="https://fonts.google.com/specimen/Lateef",
+        css_url="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap",
+        fontsource_package="@fontsource/lateef",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/lateef@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="lemonada",
+        family="Lemonada",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  300,
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-02",
+        source_url="https://fonts.google.com/specimen/Lemonada",
+        css_url="https://fonts.googleapis.com/css2?family=Lemonada:wght@300;400;500;600;700&display=swap",
+        fontsource_package="@fontsource/lemonada",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/lemonada@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="mada",
+        family="Mada",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-05",
+        source_url="https://fonts.google.com/specimen/Mada",
+        css_url="https://fonts.googleapis.com/css2?family=Mada:wght@200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/mada",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/mada@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable"
+])
+    ),
+    Font(
+        id="marhey",
+        family="Marhey",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  300,
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-08",
+        source_url="https://fonts.google.com/specimen/Marhey",
+        css_url="https://fonts.googleapis.com/css2?family=Marhey:wght@300;400;500;600;700&display=swap",
+        fontsource_package="@fontsource/marhey",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/marhey@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "variable"
+])
+    ),
+    Font(
+        id="markazi-text",
+        family="Markazi Text",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-05",
+        source_url="https://fonts.google.com/specimen/Markazi+Text",
+        css_url="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/markazi-text",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/markazi-text@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "variable",
+  "vietnamese",
+  "naskh"
+])
+    ),
+    Font(
+        id="mirza",
+        family="Mirza",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-08",
+        source_url="https://fonts.google.com/specimen/Mirza",
+        css_url="https://fonts.googleapis.com/css2?family=Mirza:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/mirza",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/mirza@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "naskh"
+])
+    ),
+    Font(
+        id="noto-kufi-arabic",
+        family="Noto Kufi Arabic",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "math",
+  "symbols"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "math",
+  "symbols"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-11",
+        source_url="https://fonts.google.com/specimen/Noto+Kufi+Arabic",
+        css_url="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/noto-kufi-arabic",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/noto-kufi-arabic@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "math",
+  "symbols",
+  "kufi"
+])
+    ),
+    Font(
+        id="noto-naskh-arabic",
+        family="Noto Naskh Arabic",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "math",
+  "symbols"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "math",
+  "symbols"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2026-01-28",
+        source_url="https://fonts.google.com/specimen/Noto+Naskh+Arabic",
+        css_url="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/noto-naskh-arabic",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/noto-naskh-arabic@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "variable",
+  "math",
+  "symbols",
+  "naskh"
+])
+    ),
+    Font(
+        id="noto-nastaliq-urdu",
+        family="Noto Nastaliq Urdu",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-02",
+        source_url="https://fonts.google.com/specimen/Noto+Nastaliq+Urdu",
+        css_url="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/noto-nastaliq-urdu",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/noto-nastaliq-urdu@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "variable",
+  "nastaliq",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="noto-sans-arabic",
+        family="Noto Sans Arabic",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "math",
+  "symbols"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "math",
+  "symbols"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-17",
+        source_url="https://fonts.google.com/specimen/Noto+Sans+Arabic",
+        css_url="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/noto-sans-arabic",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-arabic@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "math",
+  "symbols"
+])
+    ),
+    Font(
+        id="oi",
+        family="Oi",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "Latin",
+  "Latin Extended",
+  "tamil",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "latin",
+  "latin-ext",
+  "tamil",
+  "vietnamese"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-05",
+        source_url="https://fonts.google.com/specimen/Oi",
+        css_url="https://fonts.googleapis.com/css2?family=Oi:wght@400&display=swap",
+        fontsource_package="@fontsource/oi",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/oi@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static",
+  "cyrillic",
+  "cyrillic-ext",
+  "greek",
+  "tamil",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="parastoo",
+        family="Parastoo",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-10-29",
+        source_url="https://fonts.google.com/specimen/Parastoo",
+        css_url="https://fonts.googleapis.com/css2?family=Parastoo:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/parastoo",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/parastoo@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "variable",
+  "vietnamese",
+  "nastaliq",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="playpen-sans-arabic",
+        family="Playpen Sans Arabic",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="handwriting",
+        scripts=tuple([
+  "Arabic",
+  "emoji",
+  "Latin",
+  "Latin Extended",
+  "math"
+]),
+        subsets=tuple([
+  "arabic",
+  "emoji",
+  "latin",
+  "latin-ext",
+  "math"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Playpen+Sans+Arabic",
+        css_url="https://fonts.googleapis.com/css2?family=Playpen+Sans+Arabic:wght@100;200;300;400;500;600;700;800&display=swap",
+        fontsource_package="@fontsource/playpen-sans-arabic",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/playpen-sans-arabic@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "handwriting",
+  "variable",
+  "emoji",
+  "math"
+])
+    ),
+    Font(
+        id="qahiri",
+        family="Qahiri",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Qahiri",
+        css_url="https://fonts.googleapis.com/css2?family=Qahiri:wght@400&display=swap",
+        fontsource_package="@fontsource/qahiri",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/qahiri@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static"
+])
+    ),
+    Font(
+        id="rakkas",
+        family="Rakkas",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Rakkas",
+        css_url="https://fonts.googleapis.com/css2?family=Rakkas:wght@400&display=swap",
+        fontsource_package="@fontsource/rakkas",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/rakkas@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static"
+])
+    ),
+    Font(
+        id="readex-pro",
+        family="Readex Pro",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Readex+Pro",
+        css_url="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap",
+        fontsource_package="@fontsource/readex-pro",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/readex-pro@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese"
+])
+    ),
+    Font(
+        id="reem-kufi",
+        family="Reem Kufi",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-05",
+        source_url="https://fonts.google.com/specimen/Reem+Kufi",
+        css_url="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/reem-kufi",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/reem-kufi@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese",
+  "kufi"
+])
+    ),
+    Font(
+        id="reem-kufi-fun",
+        family="Reem Kufi Fun",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-02",
+        source_url="https://fonts.google.com/specimen/Reem+Kufi+Fun",
+        css_url="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/reem-kufi-fun",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/reem-kufi-fun@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "vietnamese",
+  "kufi"
+])
+    ),
+    Font(
+        id="reem-kufi-ink",
+        family="Reem Kufi Ink",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended",
+  "vietnamese"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext",
+  "vietnamese"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-06-25",
+        source_url="https://fonts.google.com/specimen/Reem+Kufi+Ink",
+        css_url="https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink:wght@400&display=swap",
+        fontsource_package="@fontsource/reem-kufi-ink",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/reem-kufi-ink@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static",
+  "vietnamese",
+  "kufi"
+])
+    ),
+    Font(
+        id="rubik",
+        family="Rubik",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "cyrillic",
+  "cyrillic-ext",
+  "hebrew",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "cyrillic",
+  "cyrillic-ext",
+  "hebrew",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "italic",
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Rubik",
+        css_url="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+        fontsource_package="@fontsource/rubik",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/rubik@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable",
+  "cyrillic",
+  "cyrillic-ext",
+  "hebrew"
+])
+    ),
+    Font(
+        id="ruwudu",
+        family="Ruwudu",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-05-30",
+        source_url="https://fonts.google.com/specimen/Ruwudu",
+        css_url="https://fonts.googleapis.com/css2?family=Ruwudu:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/ruwudu",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/ruwudu@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "naskh"
+])
+    ),
+    Font(
+        id="scheherazade-new",
+        family="Scheherazade New",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  400,
+  500,
+  600,
+  700
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2026-05-13",
+        source_url="https://fonts.google.com/specimen/Scheherazade+New",
+        css_url="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&display=swap",
+        fontsource_package="@fontsource/scheherazade-new",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/scheherazade-new@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "serif",
+  "static",
+  "naskh"
+])
+    ),
+    Font(
+        id="tajawal",
+        family="Tajawal",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  500,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-08",
+        source_url="https://fonts.google.com/specimen/Tajawal",
+        css_url="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap",
+        fontsource_package="@fontsource/tajawal",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/tajawal@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static"
+])
+    ),
+    Font(
+        id="vazirmatn",
+        family="Vazirmatn",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin",
+  "Latin Extended"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin",
+  "latin-ext"
+]),
+        weights=tuple([
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=True,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Vazirmatn",
+        css_url="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap",
+        fontsource_package="@fontsource/vazirmatn",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "variable"
+])
+    ),
+    Font(
+        id="vibes",
+        family="Vibes",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="display",
+        scripts=tuple([
+  "Arabic",
+  "Latin"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin"
+]),
+        weights=tuple([
+  400
+]),
+        styles=tuple([
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-09-10",
+        source_url="https://fonts.google.com/specimen/Vibes",
+        css_url="https://fonts.googleapis.com/css2?family=Vibes:wght@400&display=swap",
+        fontsource_package="@fontsource/vibes",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/vibes@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "display",
+  "static",
+  "calligraphic"
+])
+    ),
+    Font(
+        id="zain",
+        family="Zain",
+        provider="google-fonts",
+        license="OFL-1.1",
+        category="sans-serif",
+        scripts=tuple([
+  "Arabic",
+  "Latin"
+]),
+        subsets=tuple([
+  "arabic",
+  "latin"
+]),
+        weights=tuple([
+  200,
+  300,
+  400,
+  700,
+  800,
+  900
+]),
+        styles=tuple([
+  "italic",
+  "normal"
+]),
+        variable=False,
+        last_modified="2025-10-29",
+        source_url="https://fonts.google.com/specimen/Zain",
+        css_url="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,200;1,300;1,400;1,700;1,800;1,900&display=swap",
+        fontsource_package="@fontsource/zain",
+        fontsource_css_url="https://cdn.jsdelivr.net/npm/@fontsource/zain@latest/400.css",
+        tags=tuple([
+  "arabic",
+  "open-source",
+  "sans-serif",
+  "static",
+  "calligraphic"
+])
+    )
 )
 
 CATALOG_VERSION = "2026-08-14"
+CATALOG_SOURCE = "https://api.fontsource.org/v1/fonts"
+CATALOG_GENERATED_AT = "2026-08-14T18:59:07.610Z"

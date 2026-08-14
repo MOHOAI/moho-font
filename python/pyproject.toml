@@ -1,14 +1,15 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "moho-font"
-version = "0.2.0"
-description = "Arabic font catalog and Google Fonts loading utilities."
+version = "0.3.0"
+description = "Arabic font catalog, provider URLs, filtering, and CSS utilities."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "MOHOAI" }]
 keywords = ["arabic", "fonts", "typography", "google-fonts", "catalog"]
 classifiers = [
